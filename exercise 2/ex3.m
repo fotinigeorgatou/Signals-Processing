@@ -1,0 +1,65 @@
+figure;
+plot(noisy_signal(1:250));
+title('Noisy signal');
+
+
+NumFFT = 4096;
+Signal=abs(fftshift(fft(noisy_signal,NumFFT)));
+figure;
+plot(Signal);
+title('|FFT(Noisy signal)|');
+
+Hd=myfilter4;
+y = filter(Hd, noisy_signal);
+[H, w] = freqz(Hd, 1, 1000);
+%sound(y);
+Y=abs(fftshift(fft(y,NumFFT)));
+
+figure;
+plot(Y);
+title('|FFT(clean sound)|');
+
+noise = noisy_signal-y;
+figure;
+plot(noise(1:250));
+title('250 samples of noise');
+
+figure;
+plot(y(1:250));
+title('250 samples of sound');
+
+figure;
+plot(noise);
+
+Noise=abs(fftshift(fft(noise,NumFFT)));
+figure;
+plot(Noise);
+title('|FFT(noise)|');
+
+
+
+% NumFFT = 4096;
+% Dialog=abs(fftshift(fft(dialog,NumFFT)));
+% 
+% % figure;
+% % plot(dialog);
+% % title('dialog');
+% % 
+% figure;
+% plot(Dialog);
+% title('|FFT dialog|')
+% 
+% Hd = filter3;
+% y = filter(Hd, dialog);
+% [H, w] = freqz(Hd, 1, 1000);
+% %sound(y);
+% 
+% Y=abs(fftshift(fft(y,NumFFT)));
+% figure;
+% plot(Y);
+% figure;
+% plot(y);
+% 
+% noise=Dialog-Y;
+% figure;
+% plot(noise);
