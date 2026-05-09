@@ -1,0 +1,14 @@
+I = imread('car_noisy.jpg');
+figure;
+imagesc(I);
+axis image;
+title("Noisy image");
+
+N = 9;
+h = ones(2*N+1,2*N+1) / (2*N+1)^2;
+y = filter2(h,I);
+figure
+imshow(y/max(y(:)));
+
+
+y = medfilt2(img2,[N N]);
